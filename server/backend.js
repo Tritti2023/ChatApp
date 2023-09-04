@@ -41,6 +41,13 @@ const onClientMessage = async (ws, message) => {
       break;
     case "message":
       // TODO: Publish new message to all connected clients and save in redis
+      for (const client of clients) {
+        client.
+      }
+      break;
+      // Während Unterricht nachgeschreiben
+      case "newUser":
+      console.log("New User", messageObject.userName);
       break;
     default:
       console.error("Unknown message type: " + messageObject.type);

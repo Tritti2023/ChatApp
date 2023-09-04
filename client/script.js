@@ -19,6 +19,8 @@ const socket = new WebSocket(backendUrl);
 socket.addEventListener("open", async (event) => {
   console.log("WebSocket connected!");
   // TODO: create message object to transmit the user to the backend
+  const UserName = document.getElementById("userName").value;
+  socket.send(JSON.stringify({type: 'newUser', UserName }));
 });
 
 socket.addEventListener("message", (event) => {
