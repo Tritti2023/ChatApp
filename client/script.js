@@ -7,6 +7,7 @@ if (location.host.includes("localhost")) {
       "script>"
   );
 }
+
 const backendUrl = window.location.origin
   .replace(/^http/, "ws")
   .replace(/^https/, "wss");
@@ -16,11 +17,23 @@ const socket = new WebSocket(backendUrl);
 // !!!!!!!!!!!! DON'T TOUCH ANYTHING ABOVE THIS LINE !!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+
+
 socket.addEventListener("open", async (event) => {
   console.log("WebSocket connected!");
   // TODO: create message object to transmit the user to the backend
-  const UserName = document.getElementById("userName").value;
-  socket.send(JSON.stringify({type: 'newUser', UserName }));
+  //const UserName = document.getElementById("userName").value;
+  //socket.send(JSON.stringify({type: 'newUser', UserName }));
+  const user = await getRandomUser();
+  document.getElementById("username").value = user.name.first;
+  const message = {
+    type: "user",
+    user: {
+      id: userId,
+      name: document.getElementById("username").value,
+    },
+  };
+  socket.send(JSON.stringify(message));
 });
 
 socket.addEventListener("message", (event) => {
@@ -98,6 +111,7 @@ socket.addEventListener("error", (event) => {
 
 function changeUsername() {
   // TODO: Implement change username and forward new username to backend
+ userId = document.getElementById("login").value;
   const newUsername = document.getElementById("username").value;
   if (newUsername === "") return;
   const message = {

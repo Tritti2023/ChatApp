@@ -38,14 +38,28 @@ const onClientMessage = async (ws, message) => {
       console.log("Received from client: " + messageObject.data);
     case "user":
       // TODO: Publish all connected users to all connected clients
+      clients = clients.filter((client) => client.ws !== ws);
+      clients.push({ ws, user: messageObject.user });
+      console.log("Number of clients: " + clients.length);
+      redisClient.set(
+        `user:${messageObject.user.id}`,
+        JSON.stringify(messageObject.user)
+      );
+      redisClient.expire(
+        `user:${messageObject.user.id}`,
+        redisExpireTimeInSeconds
+      );
+      const message = {
+        type: "pushUsers",
+      };
+      publisher.publish("newMessage", JSON.stringify(message));
       break;
     case "message":
       // TODO: Publish new message to all connected clients and save in redis
-      for (const client of clients) {
-        client.
-      }
+      //for (const client of clients) {
+      //  client.}
+      publisher.publish("newMessage", JSON.stringify(messageObject));
       break;
-      // Während Unterricht nachgeschreiben
       case "newUser":
       console.log("New User", messageObject.userName);
       break;
@@ -58,6 +72,14 @@ const onClientMessage = async (ws, message) => {
 const onClose = async (ws) => {
   console.log("Websocket connection closed");
   // TODO: Remove related user from connected users and propagate new list
+  const client = clients.find((client) => client.ws === ws);
+  if (!client) return;
+  redisClient.del(`user:${client.user.id}`);
+  const message = {
+    type: "pushUsers",
+  };
+  publisher.publish("newMessage", JSON.stringify(message));
+  clients = clients.filter((client) => client.ws !== ws);
 };
 
 const getMessageHistory = async () => {
