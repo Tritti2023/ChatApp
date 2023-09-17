@@ -94,7 +94,7 @@ function showMessage(message) {
     messageElement.classList.add("text-right", "self-end");
     innerMessageElement.classList.add("bg-green-500", "border-2", "border-green-400");
   } else {
-    innerMessageElement.classList.add("bg-slate-500", "border-2", "border-gray-400");
+    innerMessageElement.classList.add("bg-blue-500", "border-2", "border-blue-400");
   }
   usernameElement.innerHTML = message.user.name;
   timeElement.innerHTML = "um " + message.time;
