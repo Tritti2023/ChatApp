@@ -20,6 +20,7 @@
             id="username"
             class="h-12 bg-slate-700 text-white grow px-4"
             placeholder="Benutzername..."
+            onkeydown="if (event.key === 'Enter') changeUsername()"
           />
           <button
             id="login"
