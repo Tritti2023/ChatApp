@@ -18,13 +18,21 @@ const socket = new WebSocket(backendUrl);
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
+const userId = generateUserId();
+/*
+async function getRandomUser() {
+  const response = await fetch("https://randomuser.me/api/");
+  const data = await response.json();
+  return data.results[0];
+}
+*/
 
 socket.addEventListener("open", async (event) => {
   console.log("WebSocket connected!");
   // TODO: create message object to transmit the user to the backend
   //const UserName = document.getElementById("userName").value;
   //socket.send(JSON.stringify({type: 'newUser', UserName }));
-  const user = await getRandomUser();
+  //const user = " ";
   document.getElementById("username").value = user.name.first;
   const message = {
     type: "user",
@@ -42,7 +50,7 @@ socket.addEventListener("message", (event) => {
   switch (messageObject.type) {
     case "ping":
       socket.send(JSON.stringify({ type: "pong", data: "FROM CLIENT" }));
-    case "user":
+    case "users":
       // TODO: Show the current users as DOM elements
       showUsers(messageObject.users)
       break;
@@ -89,7 +97,7 @@ function showMessage(message) {
     innerMessageElement.classList.add("bg-slate-500", "border-2", "border-gray-400");
   }
   usernameElement.innerHTML = message.user.name;
-  timeElement.innerHTML = "at " + message.time;
+  timeElement.innerHTML = "um " + message.time;
   timeElement.classList.add("text-xs");
   headerElement.appendChild(usernameElement);
   headerElement.appendChild(timeElement);
@@ -111,7 +119,7 @@ socket.addEventListener("error", (event) => {
 
 function changeUsername() {
   // TODO: Implement change username and forward new username to backend
- userId = document.getElementById("login").value;
+ //userId = document.getElementById("login").value;
   const newUsername = document.getElementById("username").value;
   if (newUsername === "") return;
   const message = {
@@ -143,3 +151,24 @@ function sendMessage() {
   document.getElementById("message").value = "";
 
 }
+
+function generateUserId() {
+  var S4 = function () {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  };
+  return (
+    S4() +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    S4() +
+    S4()
+  );
+}
+
