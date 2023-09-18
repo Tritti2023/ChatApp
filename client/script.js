@@ -19,13 +19,6 @@ const socket = new WebSocket(backendUrl);
 
 
 const userId = generateUserId();
-/*
-async function getRandomUser() {
-  const response = await fetch("https://randomuser.me/api/");
-  const data = await response.json();
-  return data.results[0];
-}
-*/
 
 socket.addEventListener("open", async (event) => {
   console.log("WebSocket connected!");
@@ -48,8 +41,8 @@ socket.addEventListener("message", (event) => {
   const messageObject = JSON.parse(event.data);
   console.log("Received message from server: " + messageObject.type);
   switch (messageObject.type) {
-    case "ping":
-      socket.send(JSON.stringify({ type: "pong", data: "FROM CLIENT" }));
+    //case "ping":
+    //  socket.send(JSON.stringify({ type: "pong", data: "FROM CLIENT" }));
     case "users":
       // TODO: Show the current users as DOM elements
       showUsers(messageObject.users)
