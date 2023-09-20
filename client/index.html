@@ -32,35 +32,35 @@
         </div>
       </div>
     </div>
-    <header class="flex justify-center items-center h-14 flex-shrink-0 pt-3">
-      <h1 class="font-bold text-2xl">📜 ChatApp</h1>
+    <header class="myHeaderAlignment">
+      <h1 class="myTitle">📜 ChatApp</h1>
     </header>
-    <main class="grow flex justify-center overflow-y-auto">
+    <main class="myMain">
       <div
-      class="flex flex-col flex-grow flex-shrink overflow-y-auto max-w-xl md:max-w-3xl px-4 pt-4 bg-slate-600 rounded-lg gap-4 pb-8"
+      class="myChatWindow"
         id="messages"
       ></div>
     </main>
-    <div class="flex justify-center h-12 flex-shrink-0">
-      <div class="flex grow max-w-3xl">
+    <div class="myTextAlignment">
+      <div class="myTextBox">
         <input
           type="text"
           id="message"
-          class="h-12 bg-slate-700 text-white grow px-4"
+          class="myEnterMessage"
           placeholder="Nachricht eingeben..."
           onkeydown="if (event.key === 'Enter') sendMessage()"
         />
         <button
           id="send"
-          class="h-12 bg-green-500 hover:bg-green-600 text-white px-4"
+          class="mySendButton"
           onclick="sendMessage()"
         >
           Nachricht senden
         </button>
       </div>
     </div>
-    <footer class="flex justify-center h-14 items-center flex-shrink-0">
-      <p>Made with pain and a lot of 🍷 by Tritti</p>
+    <footer class="myFooter">
+      <p>Made with pain, more pain and a lot of 🍷 by Tritti</p>
     </footer>
   </body>
 </html>
