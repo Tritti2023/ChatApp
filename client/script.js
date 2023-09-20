@@ -144,24 +144,9 @@ function sendMessage() {
   document.getElementById("message").value = "";
 
 }
-
 function generateUserId() {
-  var S4 = function () {
-    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-  };
+  var randomDigit = () => Math.floor(Math.random() * 10); 
   return (
-    S4() +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    S4() +
-    S4()
-  );
+    randomDigit() + randomDigit() +randomDigit() +"-" + randomDigit() + randomDigit() + "-" + randomDigit() + randomDigit()
+  )
 }
-
