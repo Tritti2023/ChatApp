@@ -34,5 +34,59 @@ body {
 #messages {
   background-image: url("./img/clouds.png")
 }
+.myBody {
+  display: flex;
+  flex-direction: column;
+  background-color: #072f57;
+  color: white;
+  height: 100vh;
+  width: 100vw;
+  gap: 0.75rem;
+}
+.userNameAlignment {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding-left: 2rem;
+  display: flex;
+  align-items: center;
+}
+.userNameBox{
+  display: flex;
+  flex-direction:column;
+  background-color: #919396;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  gap: 1rem;
+}
+.userNameText {
+  font-weight: bold; 
+  align-self:normal;
+}
+.userstat {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; 
+}
+.inputUser {
+  height: 3rem; 
+  background-color: #374151;
+  color: white;
+  padding: 1rem;
+  transition: transform 0.2s;
+}
+.userButton {
+  height: 3rem;
+  background-color: #00a64a;
+  color: white;
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
 
-
+.userButton:hover {
+  background-color: #007a3b;
+}

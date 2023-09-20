@@ -9,22 +9,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="script.js"></script>
   </head>
-  <body class="flex flex-col bg-slate-800 text-white h-screen w-screen gap-3">
-    <div class="absolute left-0 top-0 bottom-0 pl-8 flex items-center">
-      <div class="flex flex-col bg-slate-500 w-100 rounded-lg p-4 gap-4">
-        <h2 class="font-bold self-center">Benutzername</h2>
-        <div class="flex flex-col gap-1" id="users"></div>
+  <body class="myBody">
+    <div class="userNameAlignment">
+      <div class="userNameBox">
+        <h2 class="userNameText">Benutzername</h2>
+        <div class="userStat" id="users"></div>
         <div class="flex">
           <input
             type="text"
             id="username"
-            class="h-12 bg-slate-700 text-white grow px-4"
+            class="inputUser"
             placeholder="Benutzername..."
             onkeydown="if (event.key === 'Enter') changeUsername()"
           />
           <button
             id="login"
-            class="h-12 bg-green-500 hover:bg-green-600 text-white px-4"
+            class="userButton"
             onclick="changeUsername()"
           >
             Speichern
