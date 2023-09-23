@@ -130,7 +130,8 @@ body {
   display: flex;
   flex-grow: 1;
   max-width: 48rem;
-}
+  }
+
 .myEnterMessage {
   height: 3rem;
   background-color: #374151;
@@ -138,6 +139,7 @@ body {
   padding: 1rem;
   transition: transform 0.2s;
   width: 36rem;
+  
 }
 .mySendButton {
   height: 3rem;
@@ -148,6 +150,7 @@ body {
   cursor: pointer;
   transition: background-color 0.2s;
   width: 12rem;
+  
 }
 
 .mySendButton:hover {
