@@ -107,7 +107,6 @@ socket.addEventListener("error", (event) => {
 
 function changeUsername() {
   // TODO: Implement change username and forward new username to backend
- //userId = document.getElementById("login").value;
   const newUsername = document.getElementById("username").value;
   if (newUsername === "") return;
   const message = {
