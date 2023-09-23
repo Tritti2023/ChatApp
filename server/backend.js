@@ -1,9 +1,9 @@
 const WebSocket = require("ws");
 const redis = require("redis");
-//line below test
+
 let publisher;
 let redisClient;
-//line below test
+
 const redisExpireTimeInSeconds = 10;
 
 let clients = [];
@@ -18,19 +18,19 @@ const initializeWebsocketServer = async (server) => {
     },
   });
   await redisClient.connect();
-  // below this line -test
+
   // This is the subscriber part
   const subscriber = redisClient.duplicate();
   await subscriber.connect();
   // This is the publisher part
   publisher = redisClient.duplicate();
   await publisher.connect();
-// above this line -Test
+
 
   const websocketServer = new WebSocket.Server({ server });
   websocketServer.on("connection", onConnection);
   websocketServer.on("error", console.error);
-  //2 lines below Test
+
   await subscriber.subscribe("newMessage", onRedisMessage);
   heartbeat();
 };
@@ -40,11 +40,10 @@ const onConnection = (ws) => {
   console.log("New websocket connection");
   ws.on("close", () => onClose(ws));
   ws.on("message", (message) => onClientMessage(ws, message));
-  // TODO: Send all connected users and current message history to the new client
-  //ws.send(JSON.stringify({ type: "ping", data: "FROM SERVER" }));
+
 };
 
-//below this line -test
+
 // Get all users from redis
 const getUsersFromRedis = async () => {
   let userKeys = await redisClient.keys("user:*");
@@ -59,14 +58,12 @@ const getUsersFromRedis = async () => {
 
   return users;
 };
-// above this line -test
+
 // If a new message is received, the onClientMessage function is called
 const onClientMessage = async (ws, message) => {
   const messageObject = JSON.parse(message);
   console.log("Received message from client: " + messageObject.type);
   switch (messageObject.type) {
-    //case "pong":
-    //  console.log("Received from client: " + messageObject.data);
     case "user":
       // TODO: Publish all connected users to all connected clients
       clients = clients.filter((client) => client.ws !== ws);
@@ -87,19 +84,14 @@ const onClientMessage = async (ws, message) => {
       break;
     case "message":
       // TODO: Publish new message to all connected clients and save in redis
-      //for (const client of clients) {
-      //  client.}
       publisher.publish("newMessage", JSON.stringify(messageObject));
-      break;
-      //case "newUser":
-      //console.log("New User", messageObject.userName);
       break;
     default:
       console.error("Unknown message type: " + messageObject.type);
   }
 };
 
-// ************test *****If a new message from the redis channel is received, the onRedisMessage function is called
+
 const onRedisMessage = async (message) => {
   const messageObject = JSON.parse(message);
   console.log("Received message from redis channel: " + messageObject.type);
@@ -132,7 +124,7 @@ const onClose = async (ws) => {
   clients = clients.filter((client) => client.ws !== ws);
 };
 
-//*********************Test */
+
 // The heartbeat function is called every 5 seconds
 const heartbeat = async () => {
   for (let i = 0; i < clients.length; i++) {
@@ -153,8 +145,6 @@ const pushUsers = async () => {
     client.ws.send(JSON.stringify(message));
   });
 };
-//***************Test */
-
 
 const getMessageHistory = async () => {
   return await redisClient.get("messageHistory");
