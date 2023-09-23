@@ -23,9 +23,6 @@ const userId = generateUserId();
 socket.addEventListener("open", async (event) => {
   console.log("WebSocket connected!");
   // TODO: create message object to transmit the user to the backend
-  //const UserName = document.getElementById("userName").value;
-  //socket.send(JSON.stringify({type: 'newUser', UserName }));
-  //const user = " ";
   document.getElementById("username").value = user.name.first;
   const message = {
     type: "user",
@@ -41,8 +38,6 @@ socket.addEventListener("message", (event) => {
   const messageObject = JSON.parse(event.data);
   console.log("Received message from server: " + messageObject.type);
   switch (messageObject.type) {
-    //case "ping":
-    //  socket.send(JSON.stringify({ type: "pong", data: "FROM CLIENT" }));
     case "users":
       // TODO: Show the current users as DOM elements
       showUsers(messageObject.users)
