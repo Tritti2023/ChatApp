@@ -18,8 +18,8 @@ spec:
           image: tritti1989/chatapp:latest
           resources:
             limits:
-              cpu: "0.5"
-              memory: "500Mi"
+              cpu: "0.2"
+              memory: "200Mi"
           env:
             - name: REDIS_HOST
               value: redis-service
