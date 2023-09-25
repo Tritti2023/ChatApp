@@ -12,10 +12,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - trittibach.teko.hackerman.ch # Replace with your hostname in format *.teko.hackerman.ch Example: lastname.teko.hackerman.ch
-      secretName: trittibach.teko.hackerman.ch-tls # Replace with your hostname in format *.teko.hackerman.ch Example: lastname.teko.hackerman.ch
+        - tritti.teko.hackerman.ch # Replace with your hostname in format *.teko.hackerman.ch Example: lastname.teko.hackerman.ch
+      secretName: tritti.teko.hackerman.ch-tls # Replace with your hostname in format *.teko.hackerman.ch Example: lastname.teko.hackerman.ch
   rules:
-    - host: trittibach.teko.hackerman.ch # Replace with your hostname in format *.teko.hackerman.ch Example: lastname.teko.hackerman.ch
+    - host: tritti.teko.hackerman.ch # Replace with your hostname in format *.teko.hackerman.ch Example: lastname.teko.hackerman.ch
       http:
         paths:
           - path: /
